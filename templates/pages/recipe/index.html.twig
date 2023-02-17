@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}LeeRecipe - My ingredients{% endblock %}
+{% block title %}LeeRecipe - My recipes{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
-    {% if not ingredients.items is same as([]) %}        
+    {% if not recipes.items is same as([]) %}        
     
-        <h1>My ingredients</h1>
+        <h1>My recipes</h1>
         
-        <a href="{{path('ingredient.new')}}" class="btn btn-primary">Add ingredient</a>
+        <a href="{{path('recipe.new')}}" class="btn btn-primary">Add recipe</a>
         
         {% for message in app.flashes('success') %}
             <div class="alert alert-success mt-4">
@@ -18,8 +18,8 @@
         
         <div class="count mt-4">
             There are 
-            {{ ingredients.getTotalItemCount }} 
-            ingredient(s)
+            {{ recipes.getTotalItemCount }} 
+            recipe(s)
         </div>
         
         <table class="table table-hover">
@@ -28,22 +28,25 @@
                     <th scope="col">Number</th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Difficulty</th>
                     <th scope="col">Date of creation</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>                
-                {% for ingredient in ingredients %}
+                {% for recipe in recipes %}
                     <tr class="table-primary">
-                        <th scope="row">{{ingredient.id}}</th>
-                        <td>{{ingredient.name}}</td>
-                        <td>{{ingredient.price}}</td>
-                        <td>{{ingredient.createdAt|date("m/d/Y")}}</td>
+                        <th scope="row">{{recipe.id}}</th>
+                        <td>{{recipe.name}}</td>
+                        <td>{{recipe.price is same as(null) ? 'no info' : recipe.price }}</td>
+                        <td>{{recipe.difficulty is null ? 'no info' : recipe.difficulty}}</td>
+                        <td>{{recipe.createdAt|date("m/d/Y")}}</td>
                         <td>
-                            <a href="{{ path('ingredient.edit', {id: ingredient.id})}}" class="btn btn-success">
+                            <a href="{{ path('recipe.edit', {id: recipe.id})}}" class="btn btn-success">
                                 Edit
                             </a>
-                            <a href="{{ path('ingredient.delete', {id: ingredient.id})}}" class="btn btn-warning">
+                            
+                            <a href="{{ path('recipe.delete', {id: recipe.id})}}" class="btn btn-warning">
                                 Remove
                             </a>
                         </td>                        
@@ -54,10 +57,10 @@
         </table>
         {# display navigation #}
         <div class="navigation d-flex justify-content-center mt-4">
-            {{ knp_pagination_render(ingredients) }}
+            {{ knp_pagination_render(recipes) }}
         </div>
     {% else %}
-        <h4>There is no ingredient</h4>
+        <h4>There is no recipe</h4>
     {% endif %}        
     </div>
 {% endblock %}

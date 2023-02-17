@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
-use Webmozart\Assert\Assert as AssertAssert;
+
 
 class IngredientType extends AbstractType
 {
@@ -47,7 +47,7 @@ class IngredientType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Create my ingredient'
+                'label' => 'Validate'
             ]);
     }
 
