@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LeeRecipe - Login{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">
+            Login form
+        </h1>
+        
+        {% if error %}
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{ error.messageKey|trans(error.messageData, 'security')}}
+            </div>
+        {% endif %}
+        
+        <form action="{{path('security.login')}}" method="post">
+            <div class="form-group">
+                <label for="username" class="form-label mt-4">Email address</label>
+                <input type="email" class="form-control" id="username" placeholder="exemple@leerecipe.com" name="_username" value="{{last_username}}">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label mt-4">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="********" name="_password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary mt-4">Sign in</button>
+        </form>
+    </div>
+{% endblock %}
