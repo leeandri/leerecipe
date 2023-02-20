@@ -1,20 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}LeeRecipe - Login{% endblock %}
+{% block title %}LeeRecipe - Registration{% endblock %}
 
-{% block body %}
+{% block body %} 
     <div class="container">
         <h1 class="mt-4">
-            Login form
+            Registration form
         </h1>
         
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">
-                {{ message }}
-            </div>
-        {% endfor %}
+        {{form(form)}}
         
-        {% if error %}
+        {# {% if error %}
             <div class="alert alert-danger mt-4">
                 {{ error.messageKey|trans(error.messageData, 'security')}}
             </div>
@@ -32,6 +28,6 @@
             </div>
             
             <button type="submit" class="btn btn-primary mt-4">Sign in</button>
-        </form>
+        </form> #}
     </div>
 {% endblock %}
