@@ -60,9 +60,20 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * This controller allow us to change password
+     *
+     * @param User $user
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/user/password-edit/{id}', name: 'user.password.edit', methods: ['GET', 'POST'])]
-    public function editPassword(User $user, Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $manager): Response
-    {
+    public function editPassword(
+        User $user,
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
         if (!$this->getUser()) {
             return $this->redirectToRoute('security.login');
         }
@@ -77,12 +88,8 @@ class UserController extends AbstractController
         $newPassword = $form->getData()->getPlainPassword();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $hasher->hashPassword(
-                    $user,
-                    $newPassword
-                )
-            );
+            $user->setUpdatedAt(new \DateTimeImmutable());
+            $user->setPlainPassword($newPassword);
 
             $manager->persist($user);
             $manager->flush();
