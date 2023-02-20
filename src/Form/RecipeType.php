@@ -6,6 +6,7 @@ use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Repository\IngredientRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -20,8 +21,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class RecipeType extends AbstractType
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+
         $builder
             ->add('name', TextType::class, [
                 'attr' => [
@@ -134,7 +144,9 @@ class RecipeType extends AbstractType
                 'class' => Ingredient::class,
                 'query_builder' => function (IngredientRepository $r) {
                     return $r->createQueryBuilder('i')
-                        ->orderBy('i.name', 'ASC');
+                        ->where('i.user = :user')
+                        ->orderBy('i.name', 'ASC')
+                        ->setParameter('user', $this->security->getUser());
                 },
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -147,7 +159,7 @@ class RecipeType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Validate'
+                'label' => 'Add recipe'
             ]);
     }
 

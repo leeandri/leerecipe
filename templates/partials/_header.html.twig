@@ -7,18 +7,45 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home
+          <a class="nav-link active" href="{{ path('home.index')}}">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('ingredient.index')}}">My ingredients
-          </a>
+        {% if app.user %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('ingredient.index')}}">My ingredients
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('recipe.index')}}">My recipes
+            </a>
+          </li>
+        {% endif %}
+    </div>
+    <div class="d-flex">
+      <ul class="navbar-nav me-auto">
+      {% if app.user %}
+        <li class="nav-item dropdown" style="margin-right: 5rem;">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.fullName }}</a>
+          <div class="dropdown-menu" style="">
+            <a class="dropdown-item" href="{{ path('user.edit',{id : app.user.id})}}">Edit profile</a>
+            <a class="dropdown-item" href="{{ path('user.password.edit', {id : app.user.id})}}">Change password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ path('security.logout')}}">Logout</a>            
+          </div>
         </li>
+      {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('recipe.index')}}">My recipes
-          </a>
-        </li>
+            <a class="nav-link" href="{{ path('security.login')}}">Sign In
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('security.registration')}}">Sign Up
+            </a>
+          </li>
+      {% endif %}
+        
+      </ul>
     </div>
   </div>
 </nav>
