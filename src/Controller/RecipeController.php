@@ -24,10 +24,13 @@ class RecipeController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/recipe', name: 'recipe.index', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function index(RecipeRepository $repository, PaginatorInterface $paginator, Request $request): Response
-    {
+    #[Route('/recipe', name: 'recipe.index', methods: ['GET'])]
+    public function index(
+        RecipeRepository $repository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
         $recipes = $paginator->paginate(
             $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1),
@@ -39,6 +42,37 @@ class RecipeController extends AbstractController
         ]);
     }
 
+    #[Route('/recipe/public', 'recipe.index.public', methods: ['GET'])]
+    public function indexPublic(
+        RecipeRepository $repository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+        $recipes = $paginator->paginate(
+            $repository->findPublicRecipe(null),
+            $request->query->getInt('page', 1),
+            10
+        );
+        return $this->render('pages/recipe/index_public.html.twig', [
+            'recipes' => $recipes
+        ]);
+    }
+
+    /**
+     * This controller allow us to show a recipe if this one is public
+     *
+     * @param Recipe $recipe
+     * @return Response
+     */
+    #[Security("is_granted('ROLE_USER')  and recipe.getIsPublic() === true")]
+    #[Route('/recipe/{id}', 'recipe.show', methods: ['GET'])]
+    public function show(Recipe $recipe): Response
+    {
+        return $this->render('pages/recipe/show.html.twig', [
+            'recipe' => $recipe
+        ]);
+    }
+
     /**
      * This controller allows us to add a recipe
      *
@@ -46,8 +80,8 @@ class RecipeController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('/recipe/new', 'recipe.new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
+    #[Route('/recipe/new', 'recipe.new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         EntityManagerInterface $manager
@@ -84,8 +118,8 @@ class RecipeController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('/recipe/edit/{id}', 'recipe.edit', methods: ['GET', 'POST'])]
     #[Security("is_granted('ROLE_USER') and user === recipe.getUser()")]
+    #[Route('/recipe/edit/{id}', 'recipe.edit', methods: ['GET', 'POST'])]
     public function edit(
         Recipe $recipe,
         Request $request,

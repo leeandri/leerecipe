@@ -11,7 +11,25 @@
             <p>Quibusdam provident neque explicabo, sit mollitia cupiditate nulla.</p>
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </div>
+        
+        <div class="recipes">
+            <h2 class="mt-4">
+                Community's recipes
+            </h2>
+            <div class="d-flex flex-wrap justify-content-between">
+            {% for recipe in recipes %}
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Recipe #{{recipe.id}}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{recipe.name}}</h4>
+                        <p class="card-text">{{recipe.description|slice(0, 100) ~ '...'}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
     </div>
+    
     
  {% endblock %}
 

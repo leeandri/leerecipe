@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    LeeRecipe - 
+    {{ recipe.name }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">{{recipe.name}}</h1>
+        <div>
+            <span class="badge bg-primary">Created at {{recipe.createdAt|date('d/m/Y')}}</span>
+        </div>
+        
+        <div class="mt-4">
+            {% if recipe.time %}
+                <p>Time (in minute): {{recipe.time}}</p>
+            {% else %}
+                <p>Time not filled in</p>
+            {% endif %}
+        </div>
+        
+        <div class="mt-4">
+            {% if recipe.nbPeople %}
+                <p>For: {{recipe.nbPeople}} people</p>
+            {% else %}
+                <p>Number of people not filled in</p>
+            {% endif %}
+        </div>
+        
+        <div class="mt-4">
+            {% if recipe.difficulty %}
+                <p>Difficulty: {{recipe.difficulty}}/5</p>
+            {% else %}
+                <p>Difficulty not filled in</p>
+            {% endif %} 
+        </div>
+        
+        <div class="mt-4">
+            {% if recipe.price %}
+                <p>Price (in €): {{recipe.price}}</p>
+            {% else %}
+                <p>Price not filled in</p>
+            {% endif %}   
+        </div>  
+            
+        <div class="mt-4">Description: {{recipe.description | raw}}</div>   
+            
+        <div class="mt-4">
+            Ingredients:<br/>
+            {% for ingredient in recipe.ingredients %}
+                <span class="badge bg-primary">{{ingredient.name}}</span>
+            {% endfor %}
+        </div>
+        
+    </div>    
+{% endblock body %}

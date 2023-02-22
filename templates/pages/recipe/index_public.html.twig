@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LeeRecipe - Recipes{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+    {% if not recipes.items is same as([]) %}        
+    
+        <h1>Community's Recipes</h1>
+        
+        <div class="d-flex flex-wrap justify-content-center">
+         {% for recipe in recipes %}
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Recipe #{{recipe.id}}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{recipe.name}}</h4>
+                    <p class="card-text">{{recipe.description|slice(0, 100) ~ '...'}}</p>
+                </div>
+            </div>
+         {% endfor %}
+        </div>
+        
+    {% else %}
+        <h4>There is no recipe</h4>
+    {% endif %}        
+    </div>
+{% endblock %}
