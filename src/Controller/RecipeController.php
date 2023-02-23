@@ -65,10 +65,13 @@ class RecipeController extends AbstractController
      * This controller allow us to show a recipe if this one is public
      *
      * @param Recipe $recipe
+     * @param Request $request
+     * @param MarkRepository $repository
+     * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Security("is_granted('ROLE_USER')  and recipe.getIsPublic() === true")]
-    #[Route('/recipe/{id}', 'recipe.show', methods: ['GET', 'POST'])]
+    #[Security("is_granted('ROLE_USER')  and (recipe.getIsPublic() === true || user === recipe.getUser()) ")]
+    #[Route('/recipe/show/{id}', 'recipe.show', methods: ['GET', 'POST'])]
     public function show(
         Recipe $recipe,
         Request $request,

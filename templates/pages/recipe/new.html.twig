@@ -19,18 +19,18 @@
             </div>
             
             <div class="form-group">
-                {{ form_label(form.nbPeople)}}
-                {{ form_widget(form.nbPeople)}}
-                <div class="form-error">
-                    {{ form_errors(form.nbPeople) }}
-                </div>                
-            </div>
-            
-            <div class="form-group">
                 {{ form_label(form.time)}}
                 {{ form_widget(form.time)}}
                 <div class="form-error">
                     {{ form_errors(form.time) }}
+                </div>                
+            </div>
+            
+            <div class="form-group">
+                {{ form_label(form.nbPeople)}}
+                {{ form_widget(form.nbPeople)}}
+                <div class="form-error">
+                    {{ form_errors(form.nbPeople) }}
                 </div>                
             </div>
             
@@ -66,7 +66,18 @@
                 </div>                
             </div>
             
-            {{ form_row(form.ingredients)}}
+            {{ form_row(form.imageFile) }}
+            
+            {{ form_label(form.ingredients)}}
+            <br>
+            <div class="ingredients-wrapper">
+                {% for field in form.ingredients %}
+                    <div style="min-width: 10%;">
+                        {{ form_widget(field) }}
+                        {{ form_label(field) }}
+                    </div>
+                {% endfor %}
+            </div>
             
             
             

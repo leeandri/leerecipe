@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RecipeType extends AbstractType
 {
@@ -140,6 +141,12 @@ class RecipeType extends AbstractType
                     new Assert\NotNull(),
                 ]
             ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Recipe image',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
+            ])
             ->add('ingredients', EntityType::class, [
                 'class' => Ingredient::class,
                 'query_builder' => function (IngredientRepository $r) {
@@ -148,6 +155,7 @@ class RecipeType extends AbstractType
                         ->orderBy('i.name', 'ASC')
                         ->setParameter('user', $this->security->getUser());
                 },
+                'label' => 'The ingredients',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
