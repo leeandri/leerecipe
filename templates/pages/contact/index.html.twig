@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LeeRecipe - Contact{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <h1>Contact form</h1>
+        {{form(form)}}
+    </div>
+
+{% endblock %}
