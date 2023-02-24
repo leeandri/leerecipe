@@ -29,6 +29,17 @@ class AppFixtures extends Fixture
     {
         // Users
         $users = [];
+
+        $admin = new User;
+        $admin->setFullName('LeeRecipe Administrator')
+            ->setPseudo(null)
+            ->setEmail('admin@leerecipe.mg')
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setPlainPassword('password');
+
+        $users[] = $admin;
+        $manager->persist($admin);
+
         for ($i = 0; $i < 10; $i++) {
             $user = new User;
             $user->setEmail($this->faker->email())
