@@ -20,7 +20,7 @@
             </div>
         {% endif %}
         
-        <form action="{{path('security.login')}}" method="post">
+        <form action="{{path('security.login')}}" method="post" name="login">
             <div class="form-group">
                 <label for="username" class="form-label mt-4">Email address</label>
                 <input type="email" class="form-control" id="username" placeholder="exemple@leerecipe.com" name="_username" value="{{last_username}}">
