@@ -53,7 +53,7 @@ class CreateAdministratorCommand extends Command
 
         $plainPassword = $input->getArgument('password');
         $default = 'password';
-        $questionString = sprintf('What is ' . $fullName . ' password? [%s]', $default);
+        $questionString = sprintf('What is ' . $fullName . ' password? [%s]: ', $default);
         if (!$plainPassword) {
             $question = new Question($questionString, $default);
             $plainPassword = $helper->ask($input, $output, $question);
