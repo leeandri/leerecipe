@@ -6,10 +6,10 @@
     <div class="container mt-4">
         <div class="jumbotron">
             <h1 class="display-4">Welcome!</h1>
-            <p class="lead">LeeRecipe is amet consectetur adipisicing elit. Cupiditate hic recusandae nam est magni odit ipsam dolor? Dignissimos reiciendis, a necessitatibus expedita tempora unde et veniam consequatur fuga praesentium sit.</p>
+            <p class="lead">LeeRecipe is an app that will allow you to create recipes based on ingredients that you will have created yourself. You can share your recipes with the site's community, or keep them private.</p>
             <hr class="my-4">
-            <p>Quibusdam provident neque explicabo, sit mollitia cupiditate nulla.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <p>To get started, go to the registration page to use the app.</p>
+            <a class="btn btn-primary btn-lg" href="{{ path('security.registration') }}" role="button">Register</a>
         </div>
         
         <div class="recipes">
@@ -21,7 +21,9 @@
                 <div class="card border-primary mb-3" style="max-width: 20rem;">
                     <div class="card-header">Recipe #{{recipe.id}}</div>
                     <div class="card-body">
-                        <h4 class="card-title">{{recipe.name}}</h4>
+                        <h4 class="card-title">
+                            <a href="{{ path('recipe.show', {id: recipe.id}) }}">{{ recipe.name }}</a>
+                        </h4>
                         <p class="card-text">{{recipe.description|slice(0, 100) ~ '...'}}</p>
                     </div>
                 </div>

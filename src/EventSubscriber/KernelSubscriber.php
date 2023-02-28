@@ -14,6 +14,6 @@ class KernelSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event)
     {
-        dd($event->getRequest()->getPathInfo());
+        //dd($event->getRequest()->getPathInfo());//uncomment for test only
     }
 }

@@ -107,10 +107,6 @@ class IngredientController extends AbstractController
             return $this->redirectToRoute('ingredient.index');
         }
 
-        return $this->render('pages/ingredient/new.html.twig', [
-            'form' => $form->createView()
-        ]);
-
         return $this->render('pages/ingredient/edit.html.twig', [
             'form' => $form->createView()
         ]);
@@ -124,6 +120,7 @@ class IngredientController extends AbstractController
      * @param Ingredient $ingredient
      * @return Response
      */
+    #[Security("is_granted('ROLE_USER') and user === ingredient.getUser()")]
     #[Route('/ingredient/delete/{id}', 'ingredient.delete', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Ingredient $ingredient): Response
     {

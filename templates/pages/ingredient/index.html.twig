@@ -58,6 +58,7 @@
         </div>
     {% else %}
         <h4>There is no ingredient</h4>
+        <a href="{{path('ingredient.new')}}" class="btn btn-primary">Add one</a>
     {% endif %}        
     </div>
 {% endblock %}
