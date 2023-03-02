@@ -1,22 +1,22 @@
-# I did this following the course Symfony A to Z.
+I did this application following the course Symfony A to Z.
 
-This application allow registered users to create recipes based on common ingredients.
+It allows registered users to create **recipes** based on common **ingredients**.
 Each user can share or not his recipes to public
 
-# Some bundles used to create features in this project:
+Some bundles used to create features in this project:
 
-## DoctrineFixturesBundle and FakePHP for generating false test data.
+- [DoctrineFixturesBundle](https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html) and [FakePHP](https://fakerphp.github.io/) for generating false test data.
 
-## KnpPaginatorBundle to use a pagination system.
+- [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) to use a pagination system.
 
-## VichUploaderBundle to manage uploading pictures.
+- [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) to manage uploading pictures.
 
-## KarserRecaptcha3Bundle to securise form contact submit with a Captcha.
+- [KarserRecaptcha3Bundle](https://github.com/karser/KarserRecaptcha3Bundle) to securise form contact submit with a Captcha.
 
-## EasyAdminBundle to set up and administration backend.
+- [EasyAdminBundle](https://symfony.com/bundles/EasyAdminBundle/current/index.html) to set up and administration backend.
 
-## FOSCKEditorBundle to set up an WYSIWYG system for the administration pannel
+- [FOSCKEditorBundle](https://symfony.com/bundles/FOSCKEditorBundle/current/installation.html) to set up an WYSIWYG system for the administration pannel
 
 Deployment soon..stay tuned :)
 
-Lee A.
+<sub>Lee A.</sub>
